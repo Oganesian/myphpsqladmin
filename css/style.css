@@ -10,7 +10,7 @@ body{
 }
 
 .component-block{
-	width: 50%;
+	width: 100%;
 	margin: auto;
 	padding: 20px;
 	border: 1px solid #c7c7c7;
@@ -28,12 +28,18 @@ body{
 	font-size: 90%;
 }
 
+.component-main-row{
+	width: 100%;
+	min-height: 80px;
+	display: inline-block;
+}
+
 .under-button-container{
 	margin-top: 10px;
 }
 
 .main-row {
-	width: 80%;
+	width: 60%;
 	margin: auto;
 	margin-top: 50px;
 }
@@ -49,6 +55,11 @@ body{
 	margin: auto;
 }
 
+.standard-select,
+.standard-select option{
+	padding: 8px 10px;
+}
+
 .submit-container{
 	margin: auto;
 	text-align: center;
@@ -56,4 +67,17 @@ body{
 
 .form-container{
 	margin: auto;
+}
+
+.container {
+	float: left;
+	padding: 20px 0px;
+	width: auto;
+	text-align: center;
+}
+
+.picked-columns,
+.columns,
+.tables {
+	width: 33%;
 }

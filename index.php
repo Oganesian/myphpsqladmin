@@ -1,31 +1,8 @@
-<?php
-//if($_POST["create"])
-//{
-	//$name = $_POST["name"];
-	//$age = $_POST["age"];
-	//$address = $_POST["address"];
-
-
-	$mysqli = new mysqli("localhost", "root", "", "test");
-	//$sql = "INSERT INTO test_table VALUES(NULL, '{$name}', {$age}, '{$address}')";
-	$sql = "SELECT * FROM test_table";
-	$result = $mysqli->query($sql) or die($mysqli->error);
-	if($result->num_rows > 0){
-		while($row = $result->fetch_assoc()) {
-			while ($column_info = $result->fetch_field()){
-					echo $column_info->type . " ";
-					//SELECT `CHARACTER_MAXIMUM_LENGTH` FROM information_schema.COLUMNS WHERE TABLE_NAME = 'test_table' AND COLUMN_NAME = 'address'
-
-				//	echo $column_info->max_length . "<br>";
-
-			}
-		}
-	}
-//}
-?>
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
+		<script src="js/script.js" type="text/javascript"></script>
 	</head>
 	<body>
 		<div class="main-row">
@@ -33,6 +10,17 @@
 				<div class="upper-button-container">
 					<button type="button" class="standard-btn" name="new_mask">New</button>
 					<button type="button" class="standard-btn" name="open_mask">Open</button>
+				</div>
+				<div class="component-main-row">
+					<div class="container picked-columns">
+						<select class="standard-select" name="picked_columns" id="_picked_columns" size="5"></select>
+					</div>
+					<div class="container columns">
+						<select class="standard-select" name="existing_columns" id="_existing_columns" size="5"></select>
+					</div>
+					<div class="container tables">
+						<select class="standard-select" name="tables_in_db" id="_tables_in_db"></select>
+					</div>
 				</div>
 				<div class="under-button-container">
 					<button type="button" class="standard-btn" name="save_mask">Save</button>
