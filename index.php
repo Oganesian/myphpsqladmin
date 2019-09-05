@@ -1,33 +1,41 @@
 <html>
-	<head>
-		<link rel="stylesheet" type="text/css" href="css/style.css">
-		<script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
-		<script src="js/script.js" type="text/javascript"></script>
-	</head>
-	<body>
-		<div class="main-row">
-			<div class="component-block">
-				<div class="upper-button-container">
-					<button type="button" class="standard-btn" name="new_mask">New</button>
-					<button type="button" class="standard-btn" name="open_mask">Open</button>
-				</div>
-				<div class="component-main-row">
-					<div class="container picked-columns">
-						<select class="standard-select" name="picked_columns" id="_picked_columns" size="5"></select>
-					</div>
-					<div class="container columns">
-						<select class="standard-select" name="existing_columns" id="_existing_columns" size="5"></select>
-					</div>
-					<div class="container tables">
-						<select class="standard-select" name="tables_in_db" id="_tables_in_db"></select>
+
+<head>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
+	<script src="js/script.js" type="text/javascript"></script>
+</head>
+
+<body>
+	<div class="main-row">
+		<div class="component-block">
+			<div class="upper-button-container">
+				<button type="button" class="standard-btn" id="new_mask">New</button>
+				<button type="button" class="standard-btn" id="open_mask">Open</button>
+			</div>
+			<div class="component-main-row">
+				<div class="container picked-columns">
+					<select class="standard-select full-select" name="picked_columns" id="_picked_columns" size="5"></select>
+					<div class="columns-button-container">
+						<button type="button" class="standard-btn" id="remove_column">Remove</button>
 					</div>
 				</div>
-				<div class="under-button-container">
-					<button type="button" class="standard-btn" name="save_mask">Save</button>
-					<button type="button" class="standard-btn" name="create_mask">Create</button>
+				<div class="container columns">
+					<select class="standard-select full-select" name="existing_columns" id="_existing_columns" size="5"></select>
+					<div class="columns-button-container">
+						<button type="button" class="standard-btn" id="pick_column">Pick</button>
+					</div>
+				</div>
+				<div class="container tables">
+					<select class="standard-select" name="tables_in_db" id="_tables_in_db"></select>
 				</div>
 			</div>
-			<!--<div class="form-container">
+			<div class="under-button-container">
+				<button type="button" class="standard-btn" id="save_mask">Save</button>
+				<button type="button" class="standard-btn" id="create_mask">Create</button>
+			</div>
+		</div>
+		<!--<div class="form-container">
 				<form name="user" method="post">
 					<div class="input-container">
 						<label for="name_">Name</label>
@@ -46,6 +54,7 @@
 					</div>
 				</form>
 			</div>-->
-		</div>
-	</body>
+	</div>
+</body>
+
 </html>
