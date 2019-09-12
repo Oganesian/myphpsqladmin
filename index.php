@@ -11,29 +11,39 @@
 		<div class="component-block">
 			<div class="upper-button-container">
 				<button type="button" class="standard-btn" id="new_mask">New</button>
-				<button type="button" class="standard-btn" id="open_mask">Open</button>
+				<button type="button" class="standard-btn" id="open_mask">Open (FIXME)</button>
 			</div>
 			<div class="component-main-row">
-				<div class="container picked-columns">
-					<select class="standard-select full-select" name="picked_columns" id="_picked_columns" size="5"></select>
+				<form name="sql_mask" id="_sql_mask">
+					<div class="container picked-columns">
+						<select class="standard-select full-select" name="picked_columns" id="_picked_columns" size="5"></select>
+						<div class="columns-button-container">
+							<button type="button" class="standard-btn" id="remove_column">Remove</button>
+						</div>
+					</div>
+					<div class="container columns">
+						<select class="standard-select full-select" name="existing_columns" id="_existing_columns" size="5"></select>
+						<div class="columns-button-container">
+							<button type="button" class="standard-btn" id="pick_column">Pick</button>
+							<button type="button" class="standard-btn" id="clear_column">Clear</button>
+						</div>
+					</div>
+					<div class="container tables">
+						<select class="standard-select" name="tables_in_db" id="_tables_in_db"></select>
+					</div>
 					<div class="columns-button-container">
-						<button type="button" class="standard-btn" id="remove_column">Remove</button>
+						<button type="button" class="standard-btn" id="load_table">Load</button>
 					</div>
 				</div>
-				<div class="container columns">
-					<select class="standard-select full-select" name="existing_columns" id="_existing_columns" size="5"></select>
-					<div class="columns-button-container">
-						<button type="button" class="standard-btn" id="pick_column">Pick</button>
-					</div>
+				<div class="under-button-container">
+					<button type="button" class="standard-btn" id="save_mask">Save (FIXME)</button>
+					<button type="button" class="standard-btn" id="create_table">Create (FIXME)</button>
+					<button type="button" class="standard-btn" id="show_columns">Show</button>
 				</div>
-				<div class="container tables">
-					<select class="standard-select" name="tables_in_db" id="_tables_in_db"></select>
-				</div>
-			</div>
-			<div class="under-button-container">
-				<button type="button" class="standard-btn" id="save_mask">Save</button>
-				<button type="button" class="standard-btn" id="create_mask">Create</button>
-			</div>
+			</form>
+		</div>
+		<div class="component-block" id="showed_table">
+
 		</div>
 		<!--<div class="form-container">
 				<form name="user" method="post">

@@ -1,0 +1,7 @@
+größe von Spalten (drag'n'drop)
+
+welche tabellen, spalten, funktionen
+
+z.B.
+$myObject = new SQLTool("mytable", myspalten, funktionen (ENUM?))
+$myObject.start() -> neue Seite mit dem Tool (Tabelle anzeigen und bearbeiten lassen)

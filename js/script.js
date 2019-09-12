@@ -19,33 +19,42 @@ $(document).ready(function() {
 
   $("#pick_column").click(pick);
   $("#remove_column").click(remove);
+  $("#load_table").click(loadColumnsInBox);
 
+  $("#clear_column").click(function() {
+    $("#_existing_columns").find('option').remove();
+  });
+
+  $("#new_mask").click(function() {
+    $("#_existing_columns").find('option').remove();
+    $("#_picked_columns").find('option').remove();
+  });
+
+  $("#save_mask").click(function() {
+    alert("404 Function not found");
+  });
+
+  $("#create_table").click(function() {
+    createTable();
+  });
+
+  $("#show_columns").click(function() {
+    showColumns();
+  });
 });
 
 function pick(){
-  var $options = $("#_existing_columns > option:selected").clone();
+  var $options = $("#_existing_columns > option:selected");
   if($options.val() === undefined){
     var pickAll = confirm("Do you want to pick all columns?");
     if(pickAll){
-      var $options_ = $("#_existing_columns > option").clone();
-      $("#_picked_columns").append($options_);
-      // FIXME: dbclick and exists
-      //$('#_picked_columns option').dblclick(remove);
-      /*var exists_ = false;
-      $('#_picked_columns option').each(function(){
-        var $picked = this.value;
-        alert(1);
-        $($options_).each(function(){
-          if (this.value == $picked) {
-              exists_ = true;
-              alert(1);
-              return false;
-          }
-        });
-        if(!exists_){
-          $("#_picked_columns").append($options_);
+      $('#_existing_columns option').each(function(){
+        if($('#_picked_columns option[value='+this.value+']').length == 0){
+          $(this).unbind("dblclick");
+          $(this).dblclick(remove);
+          $("#_picked_columns").append(this);
         }
-      });*/
+      });
     }
   }
   else{
@@ -57,6 +66,7 @@ function pick(){
         }
     });
     if(!exists){
+      $($options).unbind("dblclick");
       $($options).dblclick(remove);
       $("#_picked_columns").append($options);
     }
@@ -95,8 +105,41 @@ function loadColumnsInBox(){
     url: "php/functions.php",
     data: 'table='+tableName,
     success: function(data) {
-      $("#_existing_columns").html(data);
+      $("#_existing_columns").append(data);
+      $('#_existing_columns option').unbind("dblclick");
       $('#_existing_columns option').dblclick(pick);
+    },
+  });
+}
+
+/*function createTable(){
+  var $columns = $("#_picked_columns option").map(function(){
+    return new Array([$(this).val(), $(this).data("source-table")]);
+  }).get();
+  $.ajax({
+    type: "POST",
+    url: "php/functions.php",
+    data: {"new_table_columns":$columns},
+    success: function(data) {
+      console.log($columns);
+      console.log(data);
+    },
+  });
+}*/
+
+function showColumns(){
+  var $columns = $("#_picked_columns option").map(function(){
+    return new Array([$(this).val(), $(this).data("source-table")]);
+  }).get();
+  $.ajax({
+    type: "POST",
+    url: "php/functions.php",
+    data: {"show_columns":$columns},
+    success: function(data) {
+      $("#showed_table").html(data);
+      $("#showed_table").fadeIn();
+      //console.log($columns);
+      //console.log(data);
     },
   });
 }
