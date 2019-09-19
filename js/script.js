@@ -53,7 +53,6 @@ $(document).ready(function() {
 function setOnClicks(){
   $('.delete-btn').click(function(){
     var id = $(this).parent().parent()[0].cells[0].innerHTML;
-    alert(id);
     $.ajax({
       type: "POST",
       url: "php/functions.php",
