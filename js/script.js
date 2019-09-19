@@ -17,6 +17,13 @@ $(document).ready(function() {
     }
   });
 
+  setOnClicks();
+
+  $('.edit-btn').click(function(){
+    var id = $(this).parent().parent()[0].cells[0].innerHTML;
+    alert(id);
+  });
+
   $("#pick_column").click(pick);
   $("#remove_column").click(remove);
   $("#load_table").click(loadColumnsInBox);
@@ -42,6 +49,22 @@ $(document).ready(function() {
     showColumns();
   });
 });
+
+function setOnClicks(){
+  $('.delete-btn').click(function(){
+    var id = $(this).parent().parent()[0].cells[0].innerHTML;
+    alert(id);
+    $.ajax({
+      type: "POST",
+      url: "php/functions.php",
+      data: 'deleteId='+id,
+      success: function(data) {
+        $("#showed_table").html(data);
+        setOnClicks();
+      },
+    });
+  });
+}
 
 function pick(){
   var $options = $("#_existing_columns > option:selected");

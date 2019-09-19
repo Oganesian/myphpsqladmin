@@ -1,3 +1,11 @@
+<?php
+include_once 'php/SQLTool.php';
+$myTool = new SQLTool("test", array("id", "text"), true, true, true);
+
+session_start();
+$_SESSION['myTool'] = serialize($myTool);
+
+?>
 <html>
 
 <head>
@@ -42,28 +50,9 @@
 				</div>
 			</form>
 		</div>
-		<div class="component-block" id="showed_table">
-
+		<div class="table-container" id="showed_table">
+      <?php echo $myTool->showTable(); ?>
 		</div>
-		<!--<div class="form-container">
-				<form name="user" method="post">
-					<div class="input-container">
-						<label for="name_">Name</label>
-						<input type="text" class="input" name="name" id="name_" required />
-					</div>
-					<div class="input-container">
-						<label for="age_">Age</label>
-						<input type="number" class="input" name="age" required />
-					</div>
-					<div class="input-container">
-						<label for="address_">Address</label>
-						<input type="address" class="input" name="address" required />
-					</div>
-					<div class="input-container submit-container">
-						<input type="submit" class="submit" name="create" value="Create" />
-					</div>
-				</form>
-			</div>-->
 	</div>
 </body>
 

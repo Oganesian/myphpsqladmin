@@ -1,5 +1,7 @@
 body {
   background: #f8f8f8;
+	font-size: 100%;
+	font-family: Roboto, 'Segoe UI', Tahoma, sans-serif;
 }
 
 .submit {
@@ -10,7 +12,6 @@ body {
 }
 
 .component-block {
-  width: 100%;
   margin: auto;
   padding: 20px;
   border: 1px solid #c7c7c7;
@@ -110,7 +111,14 @@ body {
   font-size: 16px;
   font-weight: 500;
   line-height: normal;
-  padding-left: 20px;
+  padding: 15px;
+}
+
+.main-row table td, .main-row table th {
+  font-weight: 500;
+  padding: 10px 15px;
+  text-align: center;
+  overflow: auto;
 }
 
 .table-block {
@@ -128,9 +136,40 @@ body {
   transition: all ease .8s;
   flex-basis: auto;
   font-size: 120%;
+	text-align: center;
+}
+
+h2{
+	margin: 0;
+}
+
+.action-img{
+	/*width: 25px;
+	height: 25px;*/
+	max-width: 100%;
+}
+
+td > div{
+	width: 25px;
+	height: 25px;
+	float: left;
+	padding: 5px;
+}
+
+td > div:hover{
+	cursor: pointer;
+	background: #e6e6e6;
+}
+
+.action-td{
+  float: right;
+}
+
+#action-th{
+	margin-right: 12px;
 }
 
 #showed_table{
   margin-top: 40px;
-  display: none;
+	margin-bottom: 160px;
 }

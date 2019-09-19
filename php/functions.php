@@ -1,5 +1,6 @@
 <?php
 include_once 'sqlquery.php';
+include_once 'SQLTool.php';
 
 if(isset($_POST['getTables'])) {
     echo getExistingTables();
@@ -7,6 +8,12 @@ if(isset($_POST['getTables'])) {
 
 if(isset($_POST['table'])) {
     echo getExistingColumns($_POST['table']);
+}
+
+if(isset($_POST['deleteId'])) {
+  session_start();
+  $obj = unserialize($_SESSION['myTool']);
+  echo $obj->deleteRow($_POST['deleteId']);
 }
 
 if(isset($_POST['new_table_columns'])) {
@@ -92,34 +99,5 @@ function showColumns($columns){
 
   $echo .= '</table></div>';
   return $echo;
-}
-
-function initializeDriversTable() {
-  if(check(1)){
-  $result = my_query("SELECT * FROM publishers", true) or die('Запрос не удался: ' . mysql_error());
-  $tableHeaders = '<table>
-    <tr id="columns-headers">
-      <th>Водитель</th>
-      <th>Телефон</th>
-      <th>E-Mail</th>
-      <th>Мест</th>
-    </tr>';
-  $echo = $tableHeaders;
-  while ($line = $result->fetch_assoc()) {
-    $tr = "<tr><td id='{$line['id_publisher']}_name'>{$line['publisher']}</td>";
-    $tr .= "<td id='{$line['id_publisher']}_phone'>{$line['phone']}</td>";
-    $tr .= "<td id='{$line['id_publisher']}_email'>{$line['email']}</td>";
-    $tr .= "<td id='{$line['id_publisher']}_places'>{$line['places_in_car']}</td>";
-    $tr .= "<td class='buttons-td'>";
-    $tr .= "<button class='std-button edit-delete' id='{$line['id_publisher']}_std-button'>•••</button></td></tr>";
-    $echo .= $tr;
-  }
-  if($echo == $tableHeaders){
-    $echo = "<h2 class='empty-table-warning'>Нет записей</h2>";
-  } else {
-    $echo .= "</table>";
-  }
-  echo $echo;
-}
 }
 ?>
