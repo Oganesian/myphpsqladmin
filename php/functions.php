@@ -16,6 +16,12 @@ if(isset($_POST['deleteId'])) {
   echo $obj->deleteRow($_POST['deleteId']);
 }
 
+if(isset($_POST['edit'])) {
+  session_start();
+  $obj = unserialize($_SESSION['myTool']);
+  echo $obj->editRows($_POST);
+}
+
 if(isset($_POST['new_table_columns'])) {
     echo createTable($_POST['new_table_columns']);
 }

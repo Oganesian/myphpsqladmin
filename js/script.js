@@ -19,11 +19,6 @@ $(document).ready(function() {
 
   setOnClicks();
 
-  $('.edit-btn').click(function(){
-    var id = $(this).parent().parent()[0].cells[0].innerHTML;
-    alert(id);
-  });
-
   $("#pick_column").click(pick);
   $("#remove_column").click(remove);
   $("#load_table").click(loadColumnsInBox);
@@ -48,11 +43,51 @@ $(document).ready(function() {
   $("#show_columns").click(function() {
     showColumns();
   });
+
 });
+
+function resizableTable(){
+  var thElm;
+  var startOffset;
+
+  Array.prototype.forEach.call(
+    document.querySelectorAll("table th"),
+    function (th) {
+      th.style.position = 'relative';
+
+    var grip = document.createElement('div');
+    grip.innerHTML = "&nbsp;";
+    grip.style.top = 0;
+    grip.style.right = 0;
+    grip.style.bottom = 0;
+    grip.style.width = '5px';
+    grip.style.position = 'absolute';
+    grip.style.cursor = 'col-resize';
+    grip.addEventListener('mousedown', function (e) {
+        thElm = th;
+        startOffset = th.offsetWidth - e.pageX;
+    });
+
+    th.appendChild(grip);
+  });
+
+document.addEventListener('mousemove', function (e) {
+  if (thElm) {
+    thElm.style.width = startOffset + e.pageX + 'px';
+  }
+});
+
+document.addEventListener('mouseup', function () {
+    thElm = undefined;
+    $("#__table th").each(function(index) {
+      console.log($(this).css("width"));
+    });
+});
+}
 
 function setOnClicks(){
   $('.delete-btn').click(function(){
-    var id = $(this).parent().parent()[0].cells[0].innerHTML;
+    var id = $(this).parent().parent()[0].cells[0].dataset.value;
     $.ajax({
       type: "POST",
       url: "php/functions.php",
@@ -63,6 +98,46 @@ function setOnClicks(){
       },
     });
   });
+
+  $('.editButton').click(function(){
+    var id = $('.editButton').attr("id");
+    var len = $('#showed_table th').length;
+    var dataArr = [];
+    dataArr[0] = 'edit:true';
+    dataArr[1] = 'old_id:'+id;
+    $('#editTable th').each(function(index) {
+      if(index + 1 == len) return true;
+      dataArr.push($(this).text()+':::::QSFQXlfS6&=sfx:::&!%&/(()§%§!)'+$('#editTable td')[index].innerHTML);
+    });
+    $.ajax({
+      type: "POST",
+      url: "php/functions.php",
+      data: {edit:dataArr},
+      success: function(data) {
+        $("#showed_table").html(data);
+        setOnClicks();
+        $(".modal").fadeOut(50);
+        $(".dialog").fadeOut(10);
+      },
+    });
+  });
+
+
+  $('.edit-btn').click(function(){
+    var id = $(this).parent().parent()[0].cells[0].dataset.value;
+    $('.editButton').attr("id", id);
+    $(".modal").fadeIn(50);
+    $("#editDialog").fadeIn(50);
+    var $th = $('#showed_table th');
+    var $tr = $(this).parent().parent()[0];
+    $("#editTable").html($($th).clone());
+    $("#editTable").append($($tr).clone());
+  });
+
+  $(".cancel").click(function() {
+   $(".modal").fadeOut(50);
+   $(".dialog").fadeOut(10);
+ });
 }
 
 function pick(){
@@ -160,8 +235,6 @@ function showColumns(){
     success: function(data) {
       $("#showed_table").html(data);
       $("#showed_table").fadeIn();
-      //console.log($columns);
-      //console.log(data);
     },
   });
 }
